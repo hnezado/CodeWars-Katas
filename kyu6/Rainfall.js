@@ -35,7 +35,6 @@ function mean(town, strng) {
     }).map((townData)=>{
       return townData.map((monthlyData)=>{
         return monthlyData.split(' ')[1]
-      // })
     })
   })
   parsedData = parsedData.map((townData)=>{
@@ -43,13 +42,6 @@ function mean(town, strng) {
       return acc+Number(num)
     }, 0)/townData.length
   })
-  // parsedData.reduce((acc, num)=>{
-  //     return acc+num
-  //   })
-    
-    // .reduce((acc, num)=>{
-    //   return 
-    // })
 
   return parsedData
 }
