@@ -46,6 +46,7 @@ function mean(town, strng) {
   return parsedData
 }
 function variance(town, strng) {
+  
 }
 
 console.log(mean('Rome', data))
