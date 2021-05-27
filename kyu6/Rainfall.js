@@ -40,6 +40,7 @@ function mean(town, strng) {
   parsedData = parsedData.map((townData)=>{
     return townData.reduce((acc, num)=>{
       return acc+Number(num)
+      
     }, 0)/townData.length
   })
 
