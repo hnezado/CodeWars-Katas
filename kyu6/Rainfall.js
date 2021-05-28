@@ -27,27 +27,40 @@ const data =
      "Beijing:Jan 3.9,Feb 4.7,Mar 8.2,Apr 18.4,May 33.0,Jun 78.1,Jul 224.3,Aug 170.0,Sep 58.4,Oct 18.0,Nov 9.3,Dec 2.7" + "\n" +
      "Lima:Jan 1.2,Feb 0.9,Mar 0.7,Apr 0.4,May 0.6,Jun 1.8,Jul 4.4,Aug 3.1,Sep 3.3,Oct 1.7,Nov 0.5,Dec 0.7";
 
-function mean(town, strng) {
-  let parsedData = strng.split('\n')
-
-  parsedData = parsedData.map((data)=>{
-      return data.split(':')[1].split(',')
-    }).map((townData)=>{
-      return townData.map((monthlyData)=>{
-        return monthlyData.split(' ')[1]
-    })
-  })
-  parsedData = parsedData.map((townData)=>{
-    return townData.reduce((acc, num)=>{
-      return acc+Number(num)
+     function getTemperatures(town, strng) {
+      let parsedData = strng.split('\n')
+      parsedData = parsedData.map((townData, index)=>{
+        return townData.split(':')
+      })
+      citiesObject = {}
+      parsedData.forEach((townData)=>{
+        citiesObject[townData[0]] = townData[1]
+      })
+      const monthlyData = citiesObject[town].split(',')
+      const temps = monthlyData.map((month)=>{
+        return month.split(' ')[1]
+      })
+      return temps
+    }
+    
+    function mean(town, strng) {
+      const temps = getTemperatures(town, strng)
+      const avg = temps.reduce((acc, num)=>{
+        return acc + Number(num)
+      }, 0)/temps.length
+    
+      return avg
+    }
+    
+    function variance(town, strng) {
+      const temps = getTemperatures(town, strng)
+      const avg = mean(town, strng)
       
-    }, 0)/townData.length
-  })
-
-  return parsedData
-}
-function variance(town, strng) {
-  
-}
-
-console.log(mean('Rome', data))
+      let variance = 0
+      temps.forEach((temp)=>{
+        variance += (temp-avg)**2
+      })
+      variance = variance / temps.length
+      return variance
+    }
+    
