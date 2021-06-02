@@ -66,7 +66,6 @@ function checkValidVersion(ver){
     } else if (char !== '.'){
       if ()
     }
-    
   })
 }
 
